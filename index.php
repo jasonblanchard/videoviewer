@@ -4,16 +4,29 @@
 
 <?php
 
+session_start();
+
 require_once 'database.php';
 require_once 'lib.php';
 
+do {
+$randomkey = randomvideo();
+} while ($randomkey == $_SESSION['randomkey']);
 
 $displayedvideo = new video;
-$displayedvideo->id = 2;
+$displayedvideo->id = $randomkey;
 $displayedvideo->load_info();
-print_r($displayedvideo);
+echo $displayedvideo->embedcode;
 
-listallvideos();
+# print_r($displayedvideo);
+
+
+
+$_SESSION['randomkey'] = $randomkey;
+
+mysql_close(load_mysql());
+
+# listallvideos();
 
 
 ?>
