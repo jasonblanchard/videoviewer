@@ -45,13 +45,13 @@ function random_video() {
     return $randomkey;
 }
 
-function add_video($name,$embedcode) {
+function add_video($title,$embedcode) {
     include_once 'database.php';
 
     $escapedcode = str_replace('"',"'",$embedcode);
 
     $cleanembed = mysql_escape_string($escapedcode);
-    $cleantitle = mysql_escape_string($name);
+    $cleantitle = mysql_escape_string($title);
 
     $test1 = mysql_query("SELECT title FROM videos WHERE title='$cleantitle'");
     $test2 = mysql_query("SELECT title FROM videos WHERE embed='$cleanembed'");

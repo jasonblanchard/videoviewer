@@ -2,12 +2,16 @@
 <head></head>
 <body>
 
+<a href="index.php">Reload</a>
+
 <?php
 
 session_start();
 
 require_once 'database.php';
 require_once 'lib.php';
+
+# Select a random video to display
 
 do {
 $randomkey = random_video();
@@ -16,20 +20,34 @@ $randomkey = random_video();
 $displayedvideo = new video;
 $displayedvideo->id = $randomkey;
 $displayedvideo->load_info();
+
 echo $displayedvideo->embedcode."<br />";
-
-# print_r($displayedvideo);
-
-
 
 $_SESSION['randomkey'] = $randomkey;
 
+?>
+
+<!-- Add a new video form -->
+
+<br />
+<form action="index.php" method="post">
+Submit a video<br />
+Title: <input type="text" name="title" /><br />
+Embed code: <input type="text" name="embedcode" /><br />
+<input type="submit" value="Add to database" />
+<br /><br />
 
 
-$name = "Carl Sagan - Pale Blue Dot";
-$embedcode = "<iframe width='420' height='315' src='http://www.youtube.com/embed/p86BPM1GV8M' frameborder='0' allowfullscreen></iframe>";
+<?php
 
-add_video($name, $embedcode);
+# Replaces double quotes with single quotes and sends input to mysql
+
+if (isset($_POST['title']) && !empty($_POST['title']) && isset($_POST['embedcode']) && !empty($_POST['embedcode'])) {
+    $title=str_replace('"',"",$_POST['title']);
+    $embedcode=str_replace('"',"'",$_POST['embedcode']);
+
+    add_video($title, $embedcode);
+}
 
 
 /*
