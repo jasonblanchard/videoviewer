@@ -25,19 +25,19 @@ class video {
 
 
 
-function listallvideos() {
+function list_all_videos() {
     include_once 'database.php';
     $query = mysql_query("SELECT * FROM videos");
     $rows = mysql_num_rows($query);
     for ($j = 0; $j < $rows; ++$j) {
             $row = mysql_fetch_row($query);
              echo 'Title: ' .        $row[1] . '<br />';
-             echo 'Embed code: ' .   $row[2] . '<br />';
+             # echo 'Embed code: ' .   $row[2] . '<br />';
              echo 'Timestamp: ' .    $row[3] . '<br /><br />';
     }
 }
 
-function randomvideo() {
+function random_video() {
     include_once 'database.php';
     $query = mysql_query("SELECT * FROM videos");
     $values = mysql_num_rows($query);
@@ -45,7 +45,7 @@ function randomvideo() {
     return $randomkey;
 }
 
-function addvideo($name,$embedcode) {
+function add_video($name,$embedcode) {
     include_once 'database.php';
     $selectall = mysql_query("SELECT * FROM videos");
     $total = mysql_num_rows($selectall)+1;
@@ -58,5 +58,16 @@ function addvideo($name,$embedcode) {
 }
 
 
-
+function remove_video($title) {
+    $query = "DELETE FROM videos WHERE title='$title'";
+    if (!mysql_query($query, load_mysql())) { 
+        echo "DELETE failed: $query<br />" .mysql_error() . "<br /><br />";
+    }
+        
+        $selectall = mysql_query("SELECT * FROM videos");
+        $total = mysql_num_rows($selectall)+1;
+        $alter = mysql_query("ALTER TABLE videos AUTO_INCREMENT=$total") or die(mysql_error());
+}
+    
+            
 ?>

@@ -10,7 +10,7 @@ require_once 'database.php';
 require_once 'lib.php';
 
 do {
-$randomkey = randomvideo();
+$randomkey = random_video();
 } while ($randomkey == $_SESSION['randomkey']);
 
 $displayedvideo = new video;
@@ -25,13 +25,20 @@ echo $displayedvideo->embedcode;
 $_SESSION['randomkey'] = $randomkey;
 
 
+/*
 
 $urlstring = str_replace('"',"'",'<iframe width="420" height="315" src="http://www.youtube.com/embed/Jui-giDd26A" frameborder="0" allowfullscreen></iframe>');
 $title = "Family Guy - I Love You (star wars)";
 
-addvideo($title, $urlstring);
+add_video($title, $urlstring);
+*/
 
-listallvideos();
+/*
+$title = "Family Guy - I Love You (star wars)";
+remove_video($title);
+*/
+
+list_all_videos();
 
 mysql_close(load_mysql());
 
