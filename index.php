@@ -16,7 +16,7 @@ $randomkey = random_video();
 $displayedvideo = new video;
 $displayedvideo->id = $randomkey;
 $displayedvideo->load_info();
-echo $displayedvideo->embedcode;
+echo $displayedvideo->embedcode."<br />";
 
 # print_r($displayedvideo);
 
@@ -25,13 +25,12 @@ echo $displayedvideo->embedcode;
 $_SESSION['randomkey'] = $randomkey;
 
 
-/*
 
-$urlstring = str_replace('"',"'",'<iframe width="420" height="315" src="http://www.youtube.com/embed/Jui-giDd26A" frameborder="0" allowfullscreen></iframe>');
+$urlstring = '<iframe width="420" height="315" src="http://www.youtube.com/embed/Jui-giDd26A" frameborder="0" allowfullscreen></iframe>';
 $title = "Family Guy - I Love You (star wars)";
 
 add_video($title, $urlstring);
-*/
+
 
 /*
 $title = "Family Guy - I Love You (star wars)";
