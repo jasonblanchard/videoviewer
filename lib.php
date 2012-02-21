@@ -47,8 +47,14 @@ function random_video() {
 
 function add_video($name,$embedcode) {
     include_once 'database.php';
-    $test1 = mysql_query("SELECT title FROM videos WHERE title='$name'");
-    $test2 = mysql_query("SELECT title FROM videos WHERE embed='$embedcode'");
+
+    $escapedcode = str_replace('"',"'",$embedcode);
+
+    $cleanembed = mysql_escape_string($escapedcode);
+    $cleantitle = mysql_escape_string($name);
+
+    $test1 = mysql_query("SELECT title FROM videos WHERE title='$cleantitle'");
+    $test2 = mysql_query("SELECT title FROM videos WHERE embed='$cleanembed'");
 
     if (mysql_num_rows($test1) || (mysql_num_rows($test2))) {
         return "That video is already in the database";
@@ -56,8 +62,7 @@ function add_video($name,$embedcode) {
         $selectall = mysql_query("SELECT * FROM videos");
         $total = mysql_num_rows($selectall)+1;
         $alter = mysql_query("ALTER TABLE videos AUTO_INCREMENT=$total") or die(mysql_error());
-        $cleanembed = mysql_escape_string(str_replace('"',"'",$embedcode));
-        $query = "INSERT INTO videos(title,embed) VALUES('$name', '$cleanembed')";
+        $query = "INSERT INTO videos(title,embed) VALUES('$cleantitle', '$cleanembed')";
         if (!mysql_query($query,load_mysql())) {
             echo "INSERT failed: $query<br />" .mysql_error() . "<br /><br />";
         }

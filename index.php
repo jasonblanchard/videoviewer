@@ -26,10 +26,10 @@ $_SESSION['randomkey'] = $randomkey;
 
 
 
-$urlstring = '<iframe width="420" height="315" src="http://www.youtube.com/embed/Jui-giDd26A" frameborder="0" allowfullscreen></iframe>';
-$title = "Family Guy - I Love You (star wars)";
+$name = "Carl Sagan - Pale Blue Dot";
+$embedcode = "<iframe width='420' height='315' src='http://www.youtube.com/embed/p86BPM1GV8M' frameborder='0' allowfullscreen></iframe>";
 
-add_video($title, $urlstring);
+add_video($name, $embedcode);
 
 
 /*
