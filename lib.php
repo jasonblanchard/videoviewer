@@ -56,7 +56,7 @@ function add_video($name,$embedcode) {
         $selectall = mysql_query("SELECT * FROM videos");
         $total = mysql_num_rows($selectall)+1;
         $alter = mysql_query("ALTER TABLE videos AUTO_INCREMENT=$total") or die(mysql_error());
-        $cleanembed = mysql_escape_string(str_replace('"',"'",embedcode));
+        $cleanembed = mysql_escape_string(str_replace('"',"'",$embedcode));
         $query = "INSERT INTO videos(title,embed) VALUES('$name', '$cleanembed')";
         if (!mysql_query($query,load_mysql())) {
             echo "INSERT failed: $query<br />" .mysql_error() . "<br /><br />";
