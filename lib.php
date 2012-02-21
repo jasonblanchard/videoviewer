@@ -37,6 +37,25 @@ function listallvideos() {
     }
 }
 
+function randomvideo() {
+    include_once 'database.php';
+    $query = mysql_query("SELECT * FROM videos");
+    $values = mysql_num_rows($query);
+    $randomkey = rand(1,$values);
+    return $randomkey;
+}
+
+function addvideo($name,$embedcode) {
+    include_once 'database.php';
+    $selectall = mysql_query("SELECT * FROM videos");
+    $total = mysql_num_rows($selectall)+1;
+    $alter = mysql_query("ALTER TABLE videos AUTO_INCREMENT=$total") or die(mysql_error());
+    $cleanembed = mysql_escape_string($embedcode);
+    $query = "INSERT INTO videos(title,embed) VALUES('$name', '$cleanembed')";
+    if (!mysql_query($query,load_mysql())) {
+        echo "INSERT failed: $query<br />" .mysql_error() . "<br /><br />";
+    }
+}
 
 
 

@@ -24,9 +24,16 @@ echo $displayedvideo->embedcode;
 
 $_SESSION['randomkey'] = $randomkey;
 
-mysql_close(load_mysql());
 
-# listallvideos();
+
+$urlstring = str_replace('"',"'",'<iframe width="420" height="315" src="http://www.youtube.com/embed/Jui-giDd26A" frameborder="0" allowfullscreen></iframe>');
+$title = "Family Guy - I Love You (star wars)";
+
+addvideo($title, $urlstring);
+
+listallvideos();
+
+mysql_close(load_mysql());
 
 
 ?>
