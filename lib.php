@@ -31,9 +31,16 @@ function list_all_videos() {
     $rows = mysql_num_rows($query);
     for ($j = 0; $j < $rows; ++$j) {
             $row = mysql_fetch_row($query);
-             echo 'Title: ' .        $row[1] . '<br />';
-             # echo 'Embed code: ' .   $row[2] . '<br />';
-             echo 'Timestamp: ' .    $row[3] . '<br /><br />';
+            echo 'ID: ' .           $row[0] . '<br />';
+            echo 'Title: ' .        $row[1] . '<br />';
+            echo 'Timestamp: ' .    $row[3] . '<br />';
+            ?>
+            <form action="index.php" method="post">
+            <input type="hidden" name="delete" value="yes" />
+            <?php echo "<input type='hidden' name='id' value='$row[0]' />";?>
+            <input type="submit" value="Delete Video" /></form>
+            <br /><br />
+            <?php
     }
 }
 
@@ -70,9 +77,9 @@ function add_video($title,$embedcode) {
 }
 
 
-function remove_video($title) {
-    $query = "DELETE FROM videos WHERE title='$title'";
-    if (!mysql_query($query, load_mysql())) { 
+function remove_video($id) {
+    $query = "DELETE FROM videos WHERE id='$id'";
+    if (!mysql_query($query,load_mysql())) { 
         echo "DELETE failed: $query<br />" .mysql_error() . "<br /><br />";
     }
         

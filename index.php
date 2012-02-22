@@ -11,6 +11,14 @@ session_start();
 require_once 'database.php';
 require_once 'lib.php';
 
+# Delete video if delete was selected
+
+if ( isset($_POST['delete']) && (!isset($_POST['title'])) ) {
+        $id = $_POST['id'];
+        remove_video($_POST['id']);
+}
+
+
 # Select a random video to display
 
 do {
@@ -49,11 +57,7 @@ if (isset($_POST['title']) && !empty($_POST['title']) && isset($_POST['embedcode
     add_video($title, $embedcode);
 }
 
-
-/*
-$title = "Family Guy - I Love You (star wars)";
-remove_video($title);
-*/
+#remove_video(16);
 
 list_all_videos();
 
