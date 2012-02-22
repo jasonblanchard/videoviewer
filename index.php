@@ -2,7 +2,7 @@
 <head></head>
 <body>
 
-<a href="index.php">Reload</a>
+<a href="index.php">Random Video</a>
 
 <?php
 
@@ -18,20 +18,35 @@ if ( isset($_POST['delete']) && (!isset($_POST['title'])) ) {
         remove_video($_POST['id']);
 }
 
+if ( isset($_POST['play']) && (!isset($_POST['title'])) ) {
+    $displayedvideo= new video;
+    $displayedvideo->id = $_POST['playid'];
+    $displayedvideo->load_info();
+
+
+    echo $displayedvideo->embedcode."<br />";
+    echo "PLAY THIS VIDEO";
+}
 
 # Select a random video to display
 
-do {
-$randomkey = random_video();
-} while ($randomkey == $_SESSION['randomkey']);
+elseif (!isset($POST_['play'])) {
+    if (isset($_SESSION['randomkey'])) {
+        do {
+        $randomkey = random_video();
+        } while ($randomkey == $_SESSION['randomkey']);
+    } else {
+        $randomkey = random_video();
+    }
 
-$displayedvideo = new video;
-$displayedvideo->id = $randomkey;
-$displayedvideo->load_info();
+    $displayedvideo = new video;
+    $displayedvideo->id = $randomkey;
+    $displayedvideo->load_info();
 
-echo $displayedvideo->embedcode."<br />";
+    echo $displayedvideo->embedcode."<br />";
 
-$_SESSION['randomkey'] = $randomkey;
+    $_SESSION['randomkey'] = $randomkey;
+}
 
 ?>
 

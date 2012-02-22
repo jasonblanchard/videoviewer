@@ -27,7 +27,7 @@ class video {
 
 function list_all_videos() {
     include_once 'database.php';
-    $query = mysql_query("SELECT * FROM videos");
+    $query = mysql_query("SELECT * FROM videos ORDER BY timestamp desc");
     $rows = mysql_num_rows($query);
     for ($j = 0; $j < $rows; ++$j) {
             $row = mysql_fetch_row($query);
@@ -35,6 +35,11 @@ function list_all_videos() {
             echo 'Title: ' .        $row[1] . '<br />';
             echo 'Timestamp: ' .    $row[3] . '<br />';
             ?>
+            <form action="index.php" method="post">
+            <input type="hidden" name="play" value="yes" />
+            <?php echo "<input type='hidden' name='playid' value='$row[0]' />";?>
+            <input type="submit" value="Play Video" /></form>
+
             <form action="index.php" method="post">
             <input type="hidden" name="delete" value="yes" />
             <?php echo "<input type='hidden' name='id' value='$row[0]' />";?>
@@ -47,9 +52,15 @@ function list_all_videos() {
 function random_video() {
     include_once 'database.php';
     $query = mysql_query("SELECT * FROM videos");
-    $values = mysql_num_rows($query);
+    $values = mysql_num_rows($query)-1;
     $randomkey = rand(1,$values);
-    return $randomkey;
+    $row = mysql_query("SELECT * FROM videos LIMIT 1 OFFSET $randomkey");
+    if ( !$row ) echo "This isn't right " . mysql_error();
+
+    $mysqlrow = mysql_fetch_row($row);
+    $rowkey = $mysqlrow[0];
+    return $rowkey;
+    
 }
 
 function add_video($title,$embedcode) {
