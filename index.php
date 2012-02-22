@@ -58,7 +58,7 @@ Submit a video<br />
 Title: <input type="text" name="title" /><br />
 Embed code: <input type="text" name="embedcode" /><br />
 <input type="submit" value="Add to database" />
-<br /><br />
+</form><br /><br />
 
 
 <?php
