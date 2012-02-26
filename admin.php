@@ -11,6 +11,6 @@ if ( isset($_POST['delete']) ) {
     remove_video($_POST['id']);
 }
 
-list_all_videos_with_delete();
+list_all_videos_with_admin();
 
 

@@ -29,9 +29,7 @@ function list_all_videos() {
     $rows = mysql_num_rows($query);
     for ($j = 0; $j < $rows; ++$j) {
         $row = mysql_fetch_row($query);
-        echo 'ID: ' .           $row[0] . '<br />';
-        echo 'Title: ' .        $row[1] . '<br />';
-        echo 'Timestamp: ' .    $row[3] . '<br />';
+        echo 'Title: ' .        $row[1];
         ?>
         <form action="index.php" method="post">
         <input type="hidden" name="play" value="yes" />
@@ -45,7 +43,7 @@ function list_all_videos() {
 
 
 
-function list_all_videos_with_delete() {
+function list_all_videos_with_admin() {
     include_once 'database.php';
     $query = mysql_query("SELECT * FROM videos ORDER BY timestamp desc");
     $rows = mysql_num_rows($query);
