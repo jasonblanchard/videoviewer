@@ -23,9 +23,29 @@ class video {
     }
 }
 
-
-
 function list_all_videos() {
+    include_once 'database.php';
+    $query = mysql_query("SELECT * FROM videos ORDER BY timestamp desc");
+    $rows = mysql_num_rows($query);
+    for ($j = 0; $j < $rows; ++$j) {
+        $row = mysql_fetch_row($query);
+        echo 'ID: ' .           $row[0] . '<br />';
+        echo 'Title: ' .        $row[1] . '<br />';
+        echo 'Timestamp: ' .    $row[3] . '<br />';
+        ?>
+        <form action="index.php" method="post">
+        <input type="hidden" name="play" value="yes" />
+        <?php echo "<input type='hidden' name='playid' value='$row[0]' />";?>
+        <input type="submit" value="Play Video" /></form>
+        <?php
+    }
+}
+
+
+
+
+
+function list_all_videos_with_delete() {
     include_once 'database.php';
     $query = mysql_query("SELECT * FROM videos ORDER BY timestamp desc");
     $rows = mysql_num_rows($query);
@@ -40,7 +60,7 @@ function list_all_videos() {
             <?php echo "<input type='hidden' name='playid' value='$row[0]' />";?>
             <input type="submit" value="Play Video" /></form>
 
-            <form action="index.php" method="post">
+            <form action="admin.php" method="post">
             <input type="hidden" name="delete" value="yes" />
             <?php echo "<input type='hidden' name='id' value='$row[0]' />";?>
             <input type="submit" value="Delete Video" /></form>
@@ -48,6 +68,7 @@ function list_all_videos() {
             <?php
     }
 }
+
 
 function random_video() {
     include_once 'database.php';
