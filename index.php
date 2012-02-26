@@ -13,12 +13,12 @@ require_once 'lib.php';
 
 # Delete video if delete was selected
 
-if ( isset($_POST['delete']) && (!isset($_POST['title'])) ) {
+if ( isset($_POST['delete']) ) {
         $id = $_POST['id'];
         remove_video($_POST['id']);
 }
 
-if ( isset($_POST['play']) && (!isset($_POST['title'])) ) {
+if ( isset($_POST['play']) ) {
     $displayedvideo= new video;
     $displayedvideo->id = $_POST['playid'];
     $displayedvideo->load_info();

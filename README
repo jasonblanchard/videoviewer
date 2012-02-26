@@ -5,10 +5,10 @@ ate a file called database.php and fill it with your mysql info:
 
 ---
 function load_mysql() {
-    $db_hostname = {mysql hostname};
-    $db_database = {mysql database};
-    $db_username = {mysql username with read & write access};
-    $db_password = {mysql password};
+    $db_hostname = "{mysql hostname}";
+    $db_database = "{mysql database}";
+    $db_username = "{mysql username with read & write access}";
+    $db_password = "{mysql password}";
 
     $db_server = mysql_connect($db_hostname,$db_username,$db_password);
     
@@ -17,5 +17,8 @@ function load_mysql() {
    
    return $db_server;
 }
+
+loadmysql()
+
 ---
 
