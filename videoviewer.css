@@ -1,0 +1,29 @@
+body {
+    background-color:#333333;
+    font-family:Muli;
+    color:#EDEDED;
+}
+
+h1 {
+    font-family:Helvetica;
+    font-size:250%;
+}
+
+p {font-size:125%;}
+
+.header {
+    width:500px;    
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+
+.video {
+    width:500px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+a:link {color:#EE7621}
+a:visited {color:#EE7621}
+a:hover {color:#EDEDED}

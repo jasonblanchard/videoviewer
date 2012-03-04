@@ -29,12 +29,12 @@ function list_all_videos() {
     $rows = mysql_num_rows($query);
     for ($j = 0; $j < $rows; ++$j) {
         $row = mysql_fetch_row($query);
-        echo 'Title: ' .        $row[1];
+        echo '<p>Title: ' .        $row[1];
         ?>
         <form action="index.php" method="post">
         <input type="hidden" name="play" value="yes" />
         <?php echo "<input type='hidden' name='playid' value='$row[0]' />";?>
-        <input type="submit" value="Play Video" /></form>
+        <input type="submit" value="Play Video" /></form></p>
         <?php
     }
 }

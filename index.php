@@ -1,8 +1,11 @@
 <html>
-<head></head>
+<head><link href='http://fonts.googleapis.com/css?family=Raleway:100|Varela|Muli' rel='stylesheet' type='text/css'> <link href='videoviewer.css' rel='stylesheet' type='text/css'></head>
 <body>
 
-<a href="index.php">Random Video</a>
+<div class="header">
+<h1><a href="index.php">Random Video</a></h1>
+<br />
+</div>
 
 <?php
 
@@ -13,7 +16,10 @@ require_once 'lib.php';
 
 # Delete video if delete was selected
 
+?>
 
+<div class="video">
+<?php
 if ( isset($_POST['play']) ) {
     $displayedvideo= new video;
     $displayedvideo->id = $_POST['playid'];
@@ -21,7 +27,6 @@ if ( isset($_POST['play']) ) {
 
 
     echo $displayedvideo->embedcode."<br />";
-    echo "PLAY THIS VIDEO";
 }
 
 # Select a random video to display
@@ -45,30 +50,13 @@ elseif (!isset($POST_['play'])) {
 }
 
 ?>
-
-<!-- Add a new video form -->
-
-<br />
-<form action="index.php" method="post">
-Submit a video<br />
-Title: <input type="text" name="title" /><br />
-Embed code: <input type="text" name="embedcode" /><br />
-<input type="submit" value="Add to database" />
-</form><br /><br />
-
+</div>
 
 <?php
 
-# Replaces double quotes with single quotes and sends input to mysql
-
-if (isset($_POST['title']) && !empty($_POST['title']) && isset($_POST['embedcode']) && !empty($_POST['embedcode'])) {
-    $title=str_replace('"',"",$_POST['title']);
-    $embedcode=str_replace('"',"'",$_POST['embedcode']);
-
-    add_video($title, $embedcode);
-}
-
-
+echo "<br />";
+echo "<br />";
+echo "<br />";
 list_all_videos();
 
 mysql_close(load_mysql());
